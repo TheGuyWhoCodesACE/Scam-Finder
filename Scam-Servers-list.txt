@@ -1,0 +1,3 @@
+https://discord.com/api/webhooks/1559385346981109761/5wPQOkRiu61hLtHjbKCaBdHc5GKINUK9O1o0n_28xKv_XbZV6PXMyvUSS4rqkJWdA-1D
+Current number of scammers who used the webhook
+0
