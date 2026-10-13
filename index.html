@@ -1,5 +1,6 @@
 <!--The Webhook in Comments for any scammer 👍-->
 <!--https://discord.com/api/webhooks/1559385346981109761/5wPQOkRiu61hLtHjbKCaBdHc5GKINUK9O1o0n_28xKv_XbZV6PXMyvUSS4rqkJWdA-1D-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +11,7 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            margin-top: 15vh;
+            margin: 15vh 20px 0;
             font-size: 3rem;
             font-weight: bold;
             overflow-wrap: anywhere;
@@ -19,12 +20,78 @@
         a {
             color: blue;
         }
+
+        textarea {
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 600px;
+            height: 120px;
+            margin: 30px auto 15px;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: normal;
+        }
+
+        button {
+            padding: 14px 24px;
+            font-size: 1.1rem;
+            cursor: pointer;
+        }
+
+        #status {
+            font-size: 1rem;
+            font-weight: normal;
+            margin-top: 15px;
+        }
     </style>
 </head>
 <body>
-    This is my Discord Webhook Scammers!
-    <a href="https://discord.com/api/webhooks/1559385346981109761/5wPQOkRiu61hLtHjbKCaBdHc5GKINUK9O1o0n_28xKv_XbZV6PXMyvUSS4rqkJWdA-1D">
-        https://discord.com/api/webhooks/1559385346981109761/5wPQOkRiu61hLtHjbKCaBdHc5GKINUK9O1o0n_28xKv_XbZV6PXMyvUSS4rqkJWdA-1D
-    </a>
+    <div>This is my Discord Webhook Scammers!</div>
+
+    <a href="https://discord.com/api/webhooks/1559385346981109761/5wPQOkRiu61hLtHjbKCaBdHc5GKINUK9O1o0n_28xKv_XbZV6PXMyvUSS4rqkJWdA-1D">Discord Webhook</a>
+
+    <textarea id="message" placeholder="Type your message here..."></textarea>
+
+    <button id="send">Send Messages to my webhook</button>
+
+    <div id="status" role="status"></div>
+
+    <script>
+        const WEBHOOK_URL = "https://discord.com/api/webhooks/1559385346981109761/5wPQOkRiu61hLtHjbKCaBdHc5GKINUK9O1o0n_28xKv_XbZV6PXMyvUSS4rqkJWdA-1D";
+
+        document.getElementById("send").addEventListener("click", async () => {
+            const message = document.getElementById("message").value.trim();
+            const status = document.getElementById("status");
+
+            if (!message) {
+                status.textContent = "Please enter a message.";
+                return;
+            }
+
+            status.textContent = "Sending...";
+
+            try {
+                const response = await fetch(WEBHOOK_URL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        content: message
+                    })
+                });
+
+                if (response.ok) {
+                    status.textContent = "Message sent successfully!";
+                    document.getElementById("message").value = "";
+                } else {
+                    status.textContent = "Failed to send message. Check the webhook.";
+                }
+            } catch (error) {
+                status.textContent = "Request failed. Please try again.";
+            }
+        });
+    </script>
 </body>
 </html>
